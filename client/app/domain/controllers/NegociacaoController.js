@@ -12,15 +12,22 @@ class NegociacaoController {
     adiciona(event) {
         event.preventDefault();
 
-        const data = DateConverter.paraData(this._inputData.value);
-        console.log(data);
-        const negociacao = new Negociacao(
-            data,
+        this._negociacoes.adiciona(this._criaNegociacao());
+        this._limparFormulario();
+    }
+
+    _limparFormulario() {
+        this._inputData.value = '2020-01-01';
+        this._inputQuantidade.value = 1;
+        this._inputvalor.value = 2.0;
+        this._inputData.focus();
+    }
+
+    _criaNegociacao () {
+        return new Negociacao(
+            DateConverter.paraData(this._inputData.value),
             parseInt(this._inputQuantidade.value),
             parseFloat(this._inputvalor.value)
         );
-
-        let diaMesAno = DateConverter.paraTexto(data);
-        console.log(diaMesAno)
     }
 }
